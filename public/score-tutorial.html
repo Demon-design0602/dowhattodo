@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - Score Tutorial</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+</head>
+<body data-theme="dark">
+    <div id="particles-js"></div>
+    <div class="background-animation"></div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html"><img src="assets/logo.svg" alt="Aura Logo"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html#history-section" class="nav-login">History</a>
+                <button id="login-btn" class="nav-login">Sign In</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    <section class="details-section">
+        <h2 class="section-title">Understanding Your Score</h2>
+        <div class="details-container" style="text-align: left; max-width: 800px; margin: auto;">
+            <p>Your Aura score is a percentage that represents the symmetry of your face. Here's what the score means:</p>
+            <ul>
+                <li><strong>90-100%:</strong> Nearly perfect symmetry. This is very rare and is considered the ideal of facial beauty.</li>
+                <li><strong>80-89%:</strong> Very high symmetry. This is considered very attractive.</li>
+                <li><strong>70-79%:</strong> High symmetry. This is considered attractive.</li>
+                <li><strong>60-69%:</strong> Above average symmetry.</li>
+                <li><strong>50-59%:</strong> Average symmetry.</li>
+                <li><strong>Below 50%:</strong> Below average symmetry.</li>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Vinni. All Rights Reserved.</p>
+    </footer>
+    <div id="new-theme-switcher" class="new-theme-switcher">
+        <img src="assets/theme-switcher.svg" alt="Theme switcher">
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

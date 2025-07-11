@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - Photo Tutorial</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+</head>
+<body data-theme="dark">
+    <div id="particles-js"></div>
+    <div class="background-animation"></div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html"><img src="assets/logo.svg" alt="Aura Logo"></a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html#history-section" class="nav-login">History</a>
+                <button id="login-btn" class="nav-login">Sign In</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    <section class="details-section">
+        <h2 class="section-title">Taking the Perfect Photo</h2>
+        <div class="details-container" style="text-align: left; max-width: 800px; margin: auto;">
+            <p>Getting a high-quality, clear photo is the most important step for an accurate Aura score. Follow these tips to get the best results:</p>
+            <ul>
+                <li><strong>Lighting is Key:</strong> Use soft, even lighting. Avoid harsh shadows or bright, direct light. Natural daylight from a window is often best.</li>
+                <li><strong>Look Directly at the Camera:</strong> Your face should be pointed straight at the camera. Avoid tilting your head up, down, or to the side.</li>
+                <li><strong>Neutral Expression:</strong> Try to maintain a neutral facial expression. Avoid smiling, frowning, or making other expressive faces.</li>
+                <li><strong>Hair Off Your Face:</strong> Make sure your hair is pulled back and not covering any part of your face, especially your forehead, eyes, and jawline.</li>
+                <li><strong>Clear Background:</strong> Use a simple, uncluttered background. This helps the AI focus on your face without distractions.</li>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Vinni. All Rights Reserved.</p>
+    </footer>
+    <div id="new-theme-switcher" class="new-theme-switcher">
+        <img src="assets/theme-switcher.svg" alt="Theme switcher">
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

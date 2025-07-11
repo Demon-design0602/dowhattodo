@@ -1,0 +1,1 @@
+services:\n  - name: aura-new-site\n    git: https://github.com/{{YOUR_GITHUB_USERNAME}}/aura-new-site.git\n    build_command: pip install -r requirements.txt\n    run_command: gunicorn -b 0.0.0.0:8080 main:app\n    instance_class: free\n    ports:\n      - port: 8080\n        protocol: TCP\n    routes:\n      - path: /\n        port: 8080

@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: aura-backend
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn --workers 4 --bind 0.0.0.0:8080 main:app"
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+

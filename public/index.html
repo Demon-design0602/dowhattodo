@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - The Symmetry Score</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+</head>
+<body data-theme="dark">
+<div id="spinner-overlay" class="spinner-overlay is-hidden">
+        <div class="spinner"></div>
+    </div>
+    <div id="particles-js"></div>
+    <div class="background-animation"></div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="Aura Logo">
+            </div>
+            <div class="nav-menu">
+<button id="history-btn" class="nav-login">History</button>
+                <button id="login-btn" class="nav-login">Sign In</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+<header class="hero">
+    <div class="hero-content">
+        <input type="file" id="image-upload" style="display: none;" accept="image/*">
+            <h1 class="hero-title">Discover Your <span class="highlight">Aura</span></h1>
+            <p class="hero-subtitle">Where Science Meets Symmetry</p>
+            <p class="hero-description">Unlock your facial symmetry score with our futuristic AI. Get an objective analysis of your unique facial structure.</p>
+            <button id="get-started-btn" class="cta">Analyze Your Photo <span class="arrow">&rarr;</span></button>
+        </div>
+    </header>
+
+    <section id="results-section" class="results-section is-hidden">
+        <h2 class="section-title">Your Analysis</h2>
+        <div id="results-container" class="results-container">
+            <!-- Analysis results will be dynamically inserted here -->
+        </div>
+        <button id="analyze-another-btn" class="cta">Analyze Another Photo</button>
+    </section>
+
+    <section class="details-section">
+        <h2 class="section-title">Why Aura?</h2>
+        <div class="details-container">
+            <div class="card">
+                <div class="card-icon">💡</div>
+                <h3 class="card-title">AI-Powered Analysis</h3>
+                <p class="card-description">Leverage our cutting-edge AI to get an unbiased, data-driven analysis of your facial symmetry.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔬</div>
+                <h3 class="card-title">Scientific Approach</h3>
+                <p class="card-description">Our algorithm is based on scientific principles of facial aesthetics and symmetry.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔒</div>
+                <h3 class="card-title">Private and Secure</h3>
+                <p class="card-description">Your photos are your own. We prioritize your privacy with secure processing and data handling.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3 class="card-title">Detailed Reports</h3>
+                <p class="card-description">Receive a comprehensive report detailing your symmetry score and what it means.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📈</div>
+                <h3 class="card-title">Track Your Progress</h3>
+                <p class="card-description">Monitor your symmetry score over time to see how it changes.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3 class="card-title">Share Your Results</h3>
+                <p class="card-description">Easily share your Aura score with friends and on social media.</p>
+            </div>
+        </div>
+    </section>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBgRtyM0Dn5sdovsS6nEN2aM4ZDgXJmIcQ",
+        authDomain: "image-95a5c.firebaseapp.com",
+        projectId: "image-95a5c",
+        storageBucket: "image-95a5c.firebasestorage.app",
+        messagingSenderId: "1096565396872",
+        appId: "1:1096565396872:web:414b6f1f6556452b1d563d",
+        measurementId: "G-435WL3299V"
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="js/particles.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/analysis.js"></script>
+    <script src="js/history.js"></script>
+    <section class="details-section">
+        <h2 class="section-title">Tutorials</h2>
+        <div class="details-container">
+            <div class="card">
+                <a href="photo-tutorial.html" class="card-link-wrapper">
+                    <div class="card-icon">📷</div>
+                    <h3 class="card-title">Taking the Perfect Photo</h3>
+                    <p class="card-description">Learn how to take the best photo for the most accurate symmetry analysis.</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="score-tutorial.html" class="card-link-wrapper">
+                    <div class="card-icon">💡</div>
+                    <h3 class="card-title">Understanding Your Score</h3>
+                    <p class="card-description">A detailed guide to understanding what your Aura score means.</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="symmetry-tutorial.html" class="card-link-wrapper">
+                    <div class="card-icon">📈</div>
+                    <h3 class="card-title">Improving Your Symmetry</h3>
+                    <p class="card-description">Tips and tricks to improve your facial symmetry over time.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Vinni. All Rights Reserved.</p>
+    </footer>
+    <div id="new-theme-switcher" class="new-theme-switcher">
+<img src="assets/theme-switcher.svg" alt="Theme switcher" class="new-theme-switcher-icon">
+    </div>
+    <div id="history-modal" class="modal is-hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Your Analysis History</h2>
+            <div id="history-container"></div>
+        </div>
+    </div>
+</body>
+</html>
