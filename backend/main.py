@@ -25,11 +25,21 @@ CORS(app, origins=[
 # Initialize Gemini API
 try:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    print("Gemini API configured successfully.")
+    # Use Gemini 2.5 Flash for better performance and accuracy
+    model = genai.GenerativeModel('gemini-2.5-flash')
+    print("Gemini 2.5 Flash API configured successfully.")
 except (KeyError, AttributeError):
     print("WARNING: Gemini API key not set.")
     model = None
+except Exception as e:
+    print(f"WARNING: Error configuring Gemini 2.5 Flash, trying fallback: {e}")
+    try:
+        # Fallback to 1.5 if 2.5 is not available
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        print("Fallback: Gemini 1.5 Flash configured successfully.")
+    except Exception as fallback_error:
+        print(f"ERROR: Could not configure any Gemini model: {fallback_error}")
+        model = None
 
 # Initialize Firebase Admin SDK
 try:
@@ -62,6 +72,26 @@ def test_cors():
         "message": "CORS is working!",
         "backend": "PythonAnywhere",
         "method": request.method
+    })
+
+@app.route('/status', methods=['GET'])
+def get_status():
+    """Get application status and AI model information"""
+    model_name = "Unknown"
+    if model:
+        # Try to get model name from the model object
+        try:
+            model_name = getattr(model, '_model_name', 'gemini-2.5-flash')
+        except:
+            model_name = "Gemini (version unknown)"
+    
+    return jsonify({
+        "status": "operational",
+        "ai_model": model_name,
+        "backend": "PythonAnywhere",
+        "firebase": "configured" if db else "not configured",
+        "gemini_api": "configured" if model else "not configured",
+        "version": "2.0"
     })
 
 @app.route('/analyze', methods=['POST'])
