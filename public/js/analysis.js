@@ -32,10 +32,50 @@ document.addEventListener('DOMContentLoaded', () => {
         spinnerOverlay.classList.toggle('is-hidden', !show);
     }
 
+    function displayErrorBox(errorMessage) {
+        resultsContainer.innerHTML = ''; // Clear previous results
+        
+        const errorBox = document.createElement('div');
+        errorBox.className = 'error-box';
+        
+        errorBox.innerHTML = `
+            <div class="error-icon">🚫</div>
+            <div class="error-title">No Human Face Detected</div>
+            <div class="error-message">${errorMessage}</div>
+            <div class="error-suggestions">
+                <h4>💡 Tips for Better Results:</h4>
+                <ul>
+                    <li>Make sure the image contains a clear human face</li>
+                    <li>Ensure good lighting in the photo</li>
+                    <li>Face should be facing forward (not profile)</li>
+                    <li>Remove sunglasses or face coverings</li>
+                    <li>Try a different photo with better quality</li>
+                </ul>
+            </div>
+            <button class="try-again-btn" onclick="document.getElementById('image-upload').click()">
+                📷 Try Another Photo
+            </button>
+        `;
+        
+        resultsContainer.appendChild(errorBox);
+        
+        // Show results section with error
+        heroSection.style.display = 'none';
+        resultsSection.classList.remove('is-hidden');
+        
+        // Add some extra visual feedback
+        setTimeout(() => {
+            errorBox.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                errorBox.style.transform = 'scale(1)';
+            }, 200);
+        }, 600);
+    }
+
     function displayResults(data) {
         // Before displaying results, check for the specific error from the AI
         if (data.error) {
-            alert(`Analysis Error: ${data.error}`);
+            displayErrorBox(data.error);
             return;
         }
 
