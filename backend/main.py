@@ -13,7 +13,14 @@ from io import BytesIO
 
 # Initialize Flask App
 app = Flask(__name__)
-CORS(app) # This will enable CORS for all routes
+
+# Configure CORS for production
+CORS(app, origins=[
+    "https://image-95a5c.web.app",
+    "https://image-95a5c.firebaseapp.com", 
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+], supports_credentials=True)
 
 # Initialize Gemini API
 try:
@@ -46,6 +53,16 @@ except Exception as e:
 @app.route('/')
 def health_check():
     return "OK"
+
+@app.route('/test', methods=['GET', 'POST', 'OPTIONS'])
+def test_cors():
+    """Test endpoint to verify CORS is working"""
+    return jsonify({
+        "status": "success",
+        "message": "CORS is working!",
+        "backend": "PythonAnywhere",
+        "method": request.method
+    })
 
 @app.route('/analyze', methods=['POST'])
 def analyze_image():
