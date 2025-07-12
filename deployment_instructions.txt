@@ -1,0 +1,29 @@
+🐍 AURA - PythonAnywhere Deployment Instructions
+===============================================
+
+Your PythonAnywhere URL will be: https://deepanshu2025.pythonanywhere.com
+
+STEP-BY-STEP DEPLOYMENT:
+
+1. 🌐 Go to: https://www.pythonanywhere.com
+2. 📝 Sign up for FREE account (no credit card needed)
+3. 🖥️ Open Console and run:
+   cd ~
+   git clone https://github.com/Demon-design0602/dowhattodo.git aura-new-site
+   cd aura-new-site
+   pip3.10 install --user -r backend/requirements.txt
+
+4. 🌐 Go to Web tab → Add new web app
+5. ⚙️ Choose Manual configuration → Python 3.10
+6. 📄 Edit WSGI file → Replace with content from pythonanywhere_wsgi.py
+7. 🔧 Add Environment Variables:
+   - GEMINI_API_KEY: your_actual_gemini_api_key
+   - FLASK_ENV: production
+
+8. 🚀 Reload web app
+9. ✅ Test: https://deepanshu2025.pythonanywhere.com
+
+FRONTEND LOCATION: https://image-95a5c.web.app
+BACKEND LOCATION: https://deepanshu2025.pythonanywhere.com
+
+For detailed instructions, see: deploy_pythonanywhere.md

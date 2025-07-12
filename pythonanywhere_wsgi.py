@@ -8,7 +8,7 @@ import sys
 import os
 
 # Add your project directory to Python path
-project_home = '/home/deepanshu2025/aura-new-site'
+project_home = '/home/asasasas3434/aura-new-site'
 if project_home not in sys.path:
     sys.path = [project_home] + sys.path
 

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const headers = new Headers({ 'Authorization': `Bearer ${window.currentUserToken}` });
-            const apiUrl = 'https://deepanshu2025.pythonanywhere.com/history';
+            const apiUrl = 'https://asasasas3434.pythonanywhere.com/history';
             const response = await fetch(apiUrl, { headers });
             const historyData = await response.json();
 
