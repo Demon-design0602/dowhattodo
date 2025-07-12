@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Use local backend in development, remote in production
                     const apiUrl = window.location.hostname === 'localhost' ? 
                         'http://localhost:8080/analyze' : 
-                        'https://aura-new-site.onrender.com/analyze';
+                        'https://deepanshu2025.pythonanywhere.com/analyze';
 
                     const response = await fetch(apiUrl, { method: 'POST', headers: headers, body: formData });
                     const data = await response.json(); // The response is now clean JSON
