@@ -18,10 +18,10 @@ CORS(app) # This will enable CORS for all routes
 # Initialize Gemini API
 try:
     genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel('gemini-2.5-flash')
+    model = genai.GenerativeModel('gemini-1.5-flash')
     print("Gemini API configured successfully.")
 except (KeyError, AttributeError):
-    print("FATAL: Gemini API key not set.")
+    print("WARNING: Gemini API key not set.")
     model = None
 
 # Initialize Firebase Admin SDK
@@ -29,12 +29,18 @@ try:
     # Use an absolute path to find the key file, which is more robust
     script_dir = os.path.dirname(os.path.abspath(__file__))
     key_path = os.path.join(script_dir, 'serviceAccountKey.json')
-    cred = credentials.Certificate(key_path)
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()
-    print("Firebase Admin SDK configured successfully.")
+    
+    if os.path.exists(key_path):
+        cred = credentials.Certificate(key_path)
+        firebase_admin.initialize_app(cred)
+        db = firestore.client()
+        print("Firebase Admin SDK configured successfully.")
+    else:
+        print("WARNING: serviceAccountKey.json not found. Running without Firebase.")
+        db = None
 except Exception as e:
-    print(f"FATAL: Could not initialize Firebase Admin SDK: {e}")
+    print(f"WARNING: Could not initialize Firebase Admin SDK: {e}")
+    print("Running without Firebase authentication and storage.")
     db = None
 
 @app.route('/')
@@ -46,17 +52,27 @@ def analyze_image():
     # First, check if the services are available
     if model is None:
         return jsonify({'error': 'The Gemini API is not configured on the server.'}), 503
-    if db is None:
-        return jsonify({'error': 'The Firebase Database is not configured on the server.'}), 503
-
-    # Get the user's ID token from the request header
-    # This requires the user to be logged in on the frontend
-    id_token = request.headers.get('Authorization').split('Bearer ')[1]
-    try:
-        decoded_token = auth.verify_id_token(id_token)
-        uid = decoded_token['uid']
-    except Exception as e:
-        return jsonify({"error": f"Unauthorized or invalid token: {e}"}), 401
+    
+    # Check if running in local development mode (no Firebase)
+    local_dev_mode = db is None or os.environ.get('FLASK_ENV') == 'development'
+    uid = "local_user"  # Default for local development
+    
+    if not local_dev_mode:
+        # Production mode - require authentication
+        if db is None:
+            return jsonify({'error': 'The Firebase Database is not configured on the server.'}), 503
+        
+        # Get the user's ID token from the request header
+        auth_header = request.headers.get('Authorization')
+        if not auth_header or not auth_header.startswith('Bearer '):
+            return jsonify({"error": "Missing or invalid Authorization header"}), 401
+            
+        id_token = auth_header.split('Bearer ')[1]
+        try:
+            decoded_token = auth.verify_id_token(id_token)
+            uid = decoded_token['uid']
+        except Exception as e:
+            return jsonify({"error": f"Unauthorized or invalid token: {e}"}), 401
 
     # Now, check for the image and prompt
     if 'prompt' not in request.form or 'image' not in request.files:

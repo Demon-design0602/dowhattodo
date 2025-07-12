@@ -7,6 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const showModal = (show) => modal.classList.toggle('is-hidden', !show);
 
     historyBtn.addEventListener('click', async () => {
+        // In local development mode, show a message since we don't have Firebase
+        const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        
+        if (isLocalDev) {
+            // Show a modal with helpful information instead of just an alert
+            historyContainer.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <h3>🚀 Development Mode</h3>
+                    <p>History feature is not available in local development mode.</p>
+                    <p>In development mode, Firebase authentication and storage are disabled.</p>
+                    <p><strong>You can still test the photo analysis feature!</strong></p>
+                </div>
+            `;
+            showModal(true);
+            return;
+        }
+        
         if (!window.currentUserToken) {
             alert("You must be signed in to view your history.");
             return;
@@ -14,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const headers = new Headers({ 'Authorization': `Bearer ${window.currentUserToken}` });
-            const response = await fetch('/history', { headers });
+            const apiUrl = 'https://aura-new-site.onrender.com/history';
+            const response = await fetch(apiUrl, { headers });
             const historyData = await response.json();
 
             if (!response.ok) {

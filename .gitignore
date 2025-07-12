@@ -1,0 +1,34 @@
+# Environment variables
+.env
+backend/.env
+
+# Firebase credentials (security)
+backend/serviceAccountKey.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+pglite-debug.log
+
+# Firebase
+.firebase/
+firebase-debug.log

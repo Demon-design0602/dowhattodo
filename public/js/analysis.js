@@ -73,16 +73,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 formData.append('prompt', PROMPT);
 
                 try {
-                    if (!window.currentUserToken) {
-                        alert("You must be signed in to analyze a photo.");
-                        showSpinner(false);
-                        return;
+                    const headers = new Headers();
+                    
+                    // Add authorization header only if user token exists (production mode)
+                    if (window.currentUserToken) {
+                        headers.append('Authorization', `Bearer ${window.currentUserToken}`);
                     }
 
-                    const headers = new Headers();
-                    headers.append('Authorization', `Bearer ${window.currentUserToken}`);
+                    // Use local backend in development, remote in production
+                    const apiUrl = window.location.hostname === 'localhost' ? 
+                        'http://localhost:8080/analyze' : 
+                        'https://aura-new-site.onrender.com/analyze';
 
-                    const response = await fetch('https://aura-new-site.onrender.com/analyze', { method: 'POST', headers: headers, body: formData });
+                    const response = await fetch(apiUrl, { method: 'POST', headers: headers, body: formData });
                     const data = await response.json(); // The response is now clean JSON
 
                     if (!response.ok) {
